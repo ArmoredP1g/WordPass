@@ -13,4 +13,6 @@ public:
 
 private:
     Ui::Word_SentenceexercisetoolClass ui;
+private slots:
+	void Back2Home();
 };

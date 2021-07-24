@@ -44,6 +44,13 @@ p, li { white-space: pre-wrap; }
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
+      <widget class="QPushButton" name="pb_pass">
+       <property name="text">
+        <string>不屑看了</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="pb_mastered">
        <property name="text">
         <string>俺会了</string>

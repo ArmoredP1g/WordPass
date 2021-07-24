@@ -19,7 +19,7 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
-        <widget class="QToolButton" name="tb_go">
+        <widget class="QToolButton" name="tb_goWord">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -27,7 +27,23 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>开始练习</string>
+          <string>复习单词</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="tb_goSentence">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>复习会话</string>
          </property>
         </widget>
        </item>
@@ -44,6 +60,10 @@
          </property>
         </widget>
        </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
         <widget class="QToolButton" name="tb_Setting">
          <property name="sizePolicy">
@@ -54,26 +74,6 @@
          </property>
          <property name="text">
           <string>设置</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_2">
-       <item>
-        <widget class="QToolButton" name="toolButton_4">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string>...</string>
          </property>
         </widget>
        </item>
