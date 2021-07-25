@@ -23,20 +23,27 @@ vector<Word> * FileLoader::getAllWords(int max, int master)
 
 	Word word;
 	unsigned int lineCount = 0;
-	while (getline(ifs,line) && lineCount < max)
+	unsigned int wordCount = 0;
+	while (getline(ifs,line) && wordCount < max)
 	{
 		lineCount++;
 		//寻找单词标签
 		if (line == "<word>")
 		{
 			wordFinded = true;
+			word.startLine = lineCount;
 			continue;
 		}
 
 		if (line == "</word>")
 		{
+			word.lineCount = lineCount - word.startLine + 1;
 			if (word.mastered < master)
+			{
 				result->push_back(word);
+				wordCount++;
+			}
+				
 			wordFinded = false;
 			originFinded = false;
 			paraphraseFinded = false;
@@ -47,14 +54,14 @@ vector<Word> * FileLoader::getAllWords(int max, int master)
 		//语种标签
 		if (line == "<jp>")
 		{
-			word.type = 1;
+			word.type = JP;
 			originFinded = true;
 			continue;
 		}
 
 		if (line == "<en>")
 		{
-			word.type = 0;
+			word.type = EN;
 			originFinded = true;
 			continue;
 		}
@@ -119,47 +126,51 @@ vector<Sentence> * FileLoader::getAllSentences(int max, int master)
 	bool originFinded = false;
 	bool paraphraseFinded = false;
 	bool masteredFinded = false;
-	bool remarkFinded = false;
 
 	string line;
 	vector<Sentence> * result = new vector<Sentence>();
 
 	Sentence sentence;
 	unsigned int lineCount = 0;
-	while (getline(ifs, line) && lineCount < max)
+	unsigned int sentCount = 0;
+	while (getline(ifs, line) && sentCount < max)
 	{
 		lineCount++;
 		//寻找单词标签
 		if (line == "<sentence>")
 		{
 			sentenceFinded = true;
+			sentence.startLine = lineCount;
 			continue;
 		}
 
 		if (line == "</sentence>")
 		{
-			if(sentence.mastered < master)
+			sentence.lineCount = lineCount - sentence.startLine + 1;
+			if (sentence.mastered < master)
+			{
 				result->push_back(sentence);
-
+				sentCount++;
+			}
+				
 			sentenceFinded = false;
 			originFinded = false;
 			paraphraseFinded = false;
 			masteredFinded = false;
-			remarkFinded = false;
-			sentence.remarks.clear();
+			sentence.paraphrase.clear();
 		}
 
 		//语种标签
 		if (line == "<jp>")
 		{
-			sentence.type = 1;
+			sentence.type = JP;
 			originFinded = true;
 			continue;
 		}
 
 		if (line == "<en>")
 		{
-			sentence.type = 0;
+			sentence.type = EN;
 			originFinded = true;
 			continue;
 		}
@@ -183,17 +194,6 @@ vector<Sentence> * FileLoader::getAllSentences(int max, int master)
 			continue;
 		}
 
-		if (line == "<remark>")
-		{
-			remarkFinded = true;
-			continue;
-		}
-
-		if (line == "</remark>")
-		{
-			remarkFinded = false;
-			continue;
-		}
 
 		//是否掌握标签
 		if (line == "<mastered>")
@@ -216,18 +216,13 @@ vector<Sentence> * FileLoader::getAllSentences(int max, int master)
 
 		if (sentenceFinded && paraphraseFinded)
 		{
-			sentence.paraphrase = line;
+			sentence.paraphrase.push_back(line);
 		}
 
 		if (sentenceFinded && masteredFinded)
 		{
 			sentence.mastered_tag_line = lineCount;
 			sentence.mastered = atoi(line.c_str());
-		}
-
-		if (sentenceFinded && remarkFinded)
-		{
-			sentence.remarks.push_back(line);
 		}
 	}
 	ifs.close();
@@ -294,14 +289,11 @@ void FileLoader::addSentence(Sentence sentence)
 		break;
 	}
 	ofs << "<paraphrase>" << endl;
-	ofs << sentence.paraphrase << endl;
-	ofs << "</paraphrase>" << endl;
-	ofs << "<remark>" << endl;
-	for (string iter : sentence.remarks)
+	for (string iter : sentence.paraphrase)
 	{
 		ofs << iter << endl;
 	}
-	ofs << "</remark>" << endl;
+	ofs << "</paraphrase>" << endl;
 	ofs << "<mastered>" << endl;
 	ofs << "0" << endl;
 	ofs << "</mastered>" << endl;
@@ -339,7 +331,34 @@ void FileLoader::ModifyLineData(char* fileName, int lineNum, char* lineData)
 	out.close();
 }
 
-
+void FileLoader::delete_(int startLine, int lineCount)
+{
+	ifstream ifs;
+	ifs.open(filepath);
+	string line = "";//暂存一行的数据
+	string strFileData = "";//暂存删除行之前所有的数据
+	int lineCount_ = 0;
+	while (getline(ifs,line))
+	{
+		lineCount_++;
+		if (lineCount_ >= startLine && lineCount_ <= startLine + lineCount - 1)
+		{
+			//...
+		}
+		else
+		{
+			strFileData += string(line);
+			strFileData += "\n";
+		}
+	}
+	ifs.close();
+	// write
+	ofstream ofs;
+	ofs.open(filepath);
+	ofs.flush();
+	ofs << strFileData;
+	ofs.close();
+}
 
 
 void FileLoader::test()
