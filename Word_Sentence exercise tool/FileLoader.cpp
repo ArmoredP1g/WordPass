@@ -38,7 +38,7 @@ vector<Word> * FileLoader::getAllWords(int max, int master)
 		if (line == "</word>")
 		{
 			word.lineCount = lineCount - word.startLine + 1;
-			if (word.mastered < master)
+			if (word.mastered < master && word.type == language)
 			{
 				result->push_back(word);
 				wordCount++;
@@ -147,7 +147,7 @@ vector<Sentence> * FileLoader::getAllSentences(int max, int master)
 		if (line == "</sentence>")
 		{
 			sentence.lineCount = lineCount - sentence.startLine + 1;
-			if (sentence.mastered < master)
+			if (sentence.mastered < master && sentence.type == language)
 			{
 				result->push_back(sentence);
 				sentCount++;
@@ -301,10 +301,10 @@ void FileLoader::addSentence(Sentence sentence)
 	ofs.close();
 }
 
-void FileLoader::ModifyLineData(char* fileName, int lineNum, char* lineData)
+void FileLoader::ModifyLineData(int lineNum, string lineData)
 {
 	ifstream in;
-	in.open(fileName);
+	in.open(filepath);
 	string strFileData = "";
 	int line = 1;
 	char tmpLineData[1024] = { 0 };
@@ -325,7 +325,7 @@ void FileLoader::ModifyLineData(char* fileName, int lineNum, char* lineData)
 	in.close();
 	//写入文件
 	ofstream out;
-	out.open(fileName);
+	out.open(filepath);
 	out.flush();
 	out << strFileData;
 	out.close();
@@ -363,5 +363,5 @@ void FileLoader::delete_(int startLine, int lineCount)
 
 void FileLoader::test()
 {
-	ModifyLineData("C:\\Users\\29147\\Desktop\\最近用的破烂\\content - 副本.txt", 9, "True");
+	
 }

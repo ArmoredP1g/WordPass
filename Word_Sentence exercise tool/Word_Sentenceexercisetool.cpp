@@ -5,6 +5,7 @@ Word_Sentenceexercisetool::Word_Sentenceexercisetool(QWidget *parent)
     : QWidget(parent)
 {
     ui.setupUi(this);
+	setWindowFlags(Qt::FramelessWindowHint);
 	delete ui.mainWidget;
 	ui.mainWidget = new Index_Menu(this);
 	ui.verticalLayout->addWidget(ui.mainWidget);
@@ -16,6 +17,7 @@ Word_Sentenceexercisetool::Word_Sentenceexercisetool(QWidget *parent)
 
 	connect(ui.pb_home, &QPushButton::clicked, this, &Word_Sentenceexercisetool::Back2Home);
 	connect(ui.pb_add, &QPushButton::clicked, this, &Word_Sentenceexercisetool::goAddingPage);
+	connect(ui.pb_close, &QPushButton::clicked, this, &QWidget::close);
 	
 	//fileLoader->getAllWords(100, 10);
 	//fileLoader->getAllSentences(100,10);

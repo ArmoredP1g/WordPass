@@ -2,10 +2,16 @@
 #define SETTINGPAGE_H
 
 #include <QWidget>
+class Word_Sentenceexercisetool;
 
 namespace Ui {
 class settingPage;
 }
+
+typedef struct {
+
+
+}Configs;
 
 class settingPage : public QWidget
 {
@@ -17,6 +23,9 @@ public:
 
 private:
     Ui::settingPage *ui;
+	Word_Sentenceexercisetool * parent;
+	void setLanguage_en();
+	void setLanguage_jp();
 };
 
 #endif // SETTINGPAGE_H

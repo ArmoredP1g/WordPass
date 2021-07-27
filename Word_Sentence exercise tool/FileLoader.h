@@ -16,6 +16,7 @@ typedef struct
 	string origin = "";
 	vector<string> paraphrase;
 	int mastered = 0;
+	int masteredThisBatch = 0;
 	unsigned int mastered_tag_line;
 	unsigned int startLine;
 	unsigned int lineCount;
@@ -27,6 +28,7 @@ typedef struct
 	string origin = "";
 	vector<string> paraphrase;
 	int mastered = 0;
+	int masteredThisBatch = 0;
 	unsigned int mastered_tag_line;
 	unsigned int startLine;
 	unsigned int lineCount;
@@ -42,7 +44,8 @@ public:
 	void addSentence(Sentence sentence);
 	void delete_(int startLine, int lineCount);
 	void test();
-	void ModifyLineData(char * fileName, int lineNum, char* lineData);
+	void ModifyLineData(int lineNum, string lineData);
+	int language = JP;
 private:
 	string filepath;
 	ifstream ifs;
