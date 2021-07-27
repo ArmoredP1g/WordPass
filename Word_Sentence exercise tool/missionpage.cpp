@@ -8,17 +8,17 @@ MissionPage::MissionPage(QWidget *parent, unsigned int mode) :
 	this->mode = mode;
 	Word_Sentenceexercisetool* p = (Word_Sentenceexercisetool*)(parent);
 	this->fileLoader = p->fileLoader;
-	LoadContent((Word_Sentenceexercisetool*)(parent));
+	
 	
     ui->setupUi(this);
-
+	LoadContent((Word_Sentenceexercisetool*)(parent));
 	connect(ui->pb_notMastered, &QPushButton::clicked, this, &MissionPage::notYet);
 	connect(ui->pb_check, &QPushButton::clicked, this, &MissionPage::showMeaning);
 	connect(ui->pb_mastered, &QPushButton::clicked, this, &MissionPage::iRememberedThis);
 	connect(ui->pb_pass, &QPushButton::clicked, this, &MissionPage::iGotIt);
 	connect(this, &MissionPage::changeLableFig, this, &MissionPage::slot_changeLable);
 
-	ui->label->setText("0/0");
+	
 
 	ui->pb_check->setDisabled(true);
 	ui->pb_mastered->setDisabled(true);
@@ -55,6 +55,7 @@ void MissionPage::LoadContent(Word_Sentenceexercisetool *parent)
 		}
 		iterS = sentences->begin();
 	}
+	ui->label->setText("0/" + QString::number(batchSize));
 }
 
 MissionPage::~MissionPage()
