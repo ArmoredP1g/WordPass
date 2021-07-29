@@ -27,6 +27,11 @@ void AddingPage::setFileLoader(FileLoader * loader)
 //slots
 void AddingPage::addItem()
 {	
+	//ÅÐ¿Õ
+	if (ui->le_wordOrSenten->text().toLocal8Bit().toStdString() == "" || ui->pt_paraphrase->toPlainText().toLocal8Bit().toStdString() == "")
+	{
+		return;
+	}
 	//È·¶¨ÓïÖÖ
 	unsigned int type;
 	if (ui->rb_en->isChecked())
