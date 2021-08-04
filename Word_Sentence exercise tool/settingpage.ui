@@ -84,7 +84,7 @@
        <item>
         <widget class="QLineEdit" name="le_wordBatchSize">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -102,7 +102,7 @@
        <item>
         <widget class="QLineEdit" name="le_sentenceBatchSize">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -120,7 +120,7 @@
        <item>
         <widget class="QLineEdit" name="le_masterLimit">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -129,7 +129,7 @@
      <item>
       <widget class="QPushButton" name="pb_confirm">
        <property name="enabled">
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <property name="text">
         <string>确定</string>

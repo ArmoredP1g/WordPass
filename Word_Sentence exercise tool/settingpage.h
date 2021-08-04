@@ -26,6 +26,9 @@ private:
 	Word_Sentenceexercisetool * parent;
 	void setLanguage_en();
 	void setLanguage_jp();
+
+	void LoadConfig();
+	void ConfirmSettigs();
 };
 
 #endif // SETTINGPAGE_H

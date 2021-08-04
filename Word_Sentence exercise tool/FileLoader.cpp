@@ -301,7 +301,62 @@ void FileLoader::addSentence(Sentence sentence)
 	ofs.close();
 }
 
+void FileLoader::ConfirmSettings(Setting settings)
+{
+	ifstream ifs(".\\userdata\\config.txt");
+	string buffer;
+	int lineCount = 0;
+	while (getline(ifs, buffer))
+	{
+		lineCount++;
+		vector<string> keyPair = split(buffer, ":");
+		if (keyPair[0] == "BatchSize(word)" || keyPair[0] == "BatchSize(sentence)")
+		{
+			ModifyLineData(lineCount, "BatchSize(word)"+ to_string(settings.BatchSize_word), ".\\userdata\\config.txt");
+		}
+		if (keyPair[0] == "BatchSize(sentence)")
+		{
+			ModifyLineData(lineCount, "BatchSize(sentence)" + to_string(settings.BatchSize_sentence), ".\\userdata\\config.txt");
+		}
+		if (keyPair[0] == "Master(word)" || keyPair[0] == "Master(sentence)")
+		{
+			ModifyLineData(lineCount, "Master(word)" + to_string(settings.Master_word), ".\\userdata\\config.txt");
+		}
+	}
+	ifs.close();
+}
+
 void FileLoader::ModifyLineData(int lineNum, string lineData)
+{
+	ifstream in;
+	in.open(filepath);
+	string strFileData = "";
+	int line = 1;
+	char tmpLineData[1024] = { 0 };
+	while (in.getline(tmpLineData, sizeof(tmpLineData)))
+	{
+		if (line == lineNum)
+		{
+			strFileData += string(lineData);
+			strFileData += "\n";
+		}
+		else
+		{
+			strFileData += string(tmpLineData);
+			strFileData += "\n";
+		}
+		line++;
+	}
+	in.close();
+	//写入文件
+	ofstream out;
+	out.open(filepath);
+	out.flush();
+	out << strFileData;
+	out.close();
+}
+
+void FileLoader::ModifyLineData(int lineNum, string lineData, string filepath)
 {
 	ifstream in;
 	in.open(filepath);
@@ -360,6 +415,28 @@ void FileLoader::delete_(int startLine, int lineCount)
 	ofs.close();
 }
 
+vector<string> FileLoader::split(const string& str, const string& delim)
+{
+	vector<string> res;
+	if ("" == str) return res;
+	//先将要切割的字符串从string类型转换为char*类型
+	char * strs = new char[str.length() + 1]; //不要忘了
+	strcpy(strs, str.c_str());
+
+	char * d = new char[delim.length() + 1];
+	strcpy(d, delim.c_str());
+
+	char *p = strtok(strs, d);
+	while (p) {
+		string s = p; //分割得到的字符串转换为string类型
+		res.push_back(s); //存入结果数组
+		p = strtok(NULL, d);
+	}
+	delete strs;
+	delete d;
+	delete p;
+	return res;
+}
 
 void FileLoader::test()
 {

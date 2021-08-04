@@ -14,7 +14,7 @@ typedef struct
 {
 	unsigned type;	//0en 1jp
 	string origin = "";
-	vector<string> paraphrase;
+	vector<string> paraphrase; 
 	int mastered = 0;
 	int masteredThisBatch = 0;
 	unsigned int mastered_tag_line;
@@ -34,6 +34,14 @@ typedef struct
 	unsigned int lineCount;
 }Sentence;
 
+typedef struct
+{
+	int BatchSize_word = 0;
+	int BatchSize_sentence = 0;
+	int Master_word = 0;
+	int Master_sentence = 0;
+}Setting;
+
 class FileLoader
 {
 public:
@@ -45,6 +53,9 @@ public:
 	void delete_(int startLine, int lineCount);
 	void test();
 	void ModifyLineData(int lineNum, string lineData);
+	void ModifyLineData(int lineNum, string lineData, string filepath);
+	void ConfirmSettings(Setting settings);
+	vector<string> split(const string& str, const string& delim);
 	int language = JP;
 private:
 	string filepath;
