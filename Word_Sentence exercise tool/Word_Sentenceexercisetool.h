@@ -5,6 +5,7 @@
 #include "missionpage.h"
 #include "settingpage.h"
 #include "addingpage.h"
+#include "vocabpage.h"
 
 #define WORD_MODE 0
 #define SENTENCE_MODE 1
@@ -19,12 +20,14 @@ public:
 	void Back2Home();
 	void goWordMission();
 	void goSentenceMission();
+	void goVocabPage();
 	void goSettingPage();
 
     Ui::Word_SentenceexercisetoolClass ui;
 	void LoadConfig(string path);
 	vector<string> split(const string& str, const string& delim);
-	AddingPage * addingPage;
+	AddingPage * addingPage;//‘§º”‘ÿÃÌº”“≥√Ê
+	VocabPage * vocabPage;
 	FileLoader * fileLoader;
 	unsigned int batchSize_Word;
 	unsigned int batchSize_Sentence;

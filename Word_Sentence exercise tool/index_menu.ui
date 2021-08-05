@@ -50,7 +50,7 @@
        <item>
         <widget class="QToolButton" name="tb_LibManage">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">

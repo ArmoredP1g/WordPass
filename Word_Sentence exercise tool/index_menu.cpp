@@ -10,6 +10,7 @@ Index_Menu::Index_Menu(Word_Sentenceexercisetool *parent) :
 	connect(ui->tb_goWord, &QToolButton::clicked, parent, &Word_Sentenceexercisetool::goWordMission);
 	connect(ui->tb_goSentence, &QToolButton::clicked, parent, &Word_Sentenceexercisetool::goSentenceMission);
 	connect(ui->tb_Setting, &QToolButton::clicked, parent, &Word_Sentenceexercisetool::goSettingPage);
+	connect(ui->tb_LibManage, &QToolButton::clicked, parent, &Word_Sentenceexercisetool::goVocabPage);
 }
 
 Index_Menu::~Index_Menu()

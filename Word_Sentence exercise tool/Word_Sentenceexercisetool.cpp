@@ -10,28 +10,34 @@ Word_Sentenceexercisetool::Word_Sentenceexercisetool(QWidget *parent)
 	ui.mainWidget = new Index_Menu(this);
 	ui.verticalLayout->addWidget(ui.mainWidget);
 	addingPage = new AddingPage;
+	vocabPage = NULL;
 	
 	fileLoader = new FileLoader(".\\userdata\\单词例句库.txt");
+	fileLoader->cfg_filepath = ".\\userdata\\config.txt";
 	addingPage->setFileLoader(fileLoader);
 	LoadConfig(".\\userdata\\config.txt");
 
 	connect(ui.pb_home, &QPushButton::clicked, this, &Word_Sentenceexercisetool::Back2Home);
 	connect(ui.pb_add, &QPushButton::clicked, this, &Word_Sentenceexercisetool::goAddingPage);
 	connect(ui.pb_close, &QPushButton::clicked, this, &QWidget::close);
-	
+
 	//fileLoader->getAllWords(100, 10);
 	//fileLoader->getAllSentences(100,10);
-
 	//fileLoader->delete_(122,15);
-
 }
 
 Word_Sentenceexercisetool::~Word_Sentenceexercisetool()
 {
 	delete addingPage;
 	delete fileLoader;
+	if (NULL != vocabPage)
+	{
+		vocabPage->close();
+		delete vocabPage;
+	}
 }
 
+//后续类似功能整合到FileLoader中
 void Word_Sentenceexercisetool::LoadConfig(string path)
 {
 	ifstream ifs(path);
@@ -102,6 +108,15 @@ void Word_Sentenceexercisetool::goSentenceMission()
 	delete ui.mainWidget;
 	ui.mainWidget = new MissionPage(this, SENTENCE_MODE);
 	ui.verticalLayout->addWidget(ui.mainWidget);
+}
+
+void Word_Sentenceexercisetool::goVocabPage()
+{
+	if (NULL == vocabPage)
+	{
+		vocabPage = new VocabPage(this, fileLoader);
+	}
+	vocabPage->show();
 }
 
 void Word_Sentenceexercisetool::goSettingPage()
