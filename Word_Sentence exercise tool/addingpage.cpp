@@ -46,7 +46,7 @@ void AddingPage::addItem()
 	if (ui->rb_addWord->isChecked())
 	{
 		//添加单词
-		Word word;
+		Word_And_Sentence word;
 		word.type = type;
 		word.mastered = 0;
 		word.origin = ui->le_wordOrSenten->text().toLocal8Bit().toStdString();
@@ -56,7 +56,7 @@ void AddingPage::addItem()
 	else
 	{
 		//添加句子
-		Sentence senten;
+		Word_And_Sentence senten;
 		senten.type = type;
 		senten.mastered = 0;
 		senten.origin = ui->le_wordOrSenten->text().toLocal8Bit().toStdString();

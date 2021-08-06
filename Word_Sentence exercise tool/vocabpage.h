@@ -27,11 +27,12 @@ private:
     Ui::VocabPage *ui;
 	Word_Sentenceexercisetool * parent;
 	FileLoader * fileLoader;
-	vector<Word> * words;//word list
-	vector<Sentence> * sentents;//sentence list
+	vector<Word_And_Sentence> * words;//word list
+	vector<Word_And_Sentence> * sentents;//sentence list
 	vector<VocabListItem *> listContainer;//存放列表中的自定义控件
 	void refreshAll();//重新加载内容
 	void resetList();
+	void del();
 
 };
 

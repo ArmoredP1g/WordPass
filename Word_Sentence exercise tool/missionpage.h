@@ -28,10 +28,10 @@ private:
 	void LoadContent(Word_Sentenceexercisetool *parent);//加载内容
 	unsigned int mode;//0单词 1会话
 	FileLoader * fileLoader;
-	vector<Word> * words = NULL;
-	vector<Sentence> * sentences = NULL;
-	vector<Word>::iterator iterW;
-	vector<Sentence>::iterator iterS;
+	vector<Word_And_Sentence> * words = NULL;
+	vector<Word_And_Sentence> * sentences = NULL;
+	vector<Word_And_Sentence>::iterator iterW;
+	vector<Word_And_Sentence>::iterator iterS;
 	unsigned int batchSize;//一组多少个单词、例句
 	unsigned int doneNum = 0;//记录本轮已经结束的个数
 

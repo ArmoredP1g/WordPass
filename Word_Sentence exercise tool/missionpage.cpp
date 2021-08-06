@@ -44,7 +44,7 @@ void MissionPage::LoadContent(Word_Sentenceexercisetool *parent)
 	if (mode == SENTENCE_MODE)
 	{
 		sentences = parent->fileLoader->getAllSentences(parent->batchSize_Sentence, parent->master_Sentence);
-		for (Sentence iter : *sentences)
+		for (Word_And_Sentence iter : *sentences)
 		{
 			iter.mastered = 0;
 		}
@@ -219,7 +219,7 @@ void MissionPage::iRememberedThis()
 	{
 		iterS->mastered++;
 		iterS->masteredThisBatch++;
-		fileLoader->ModifyLineData(iterS->mastered_tag_line, to_string(iterS->mastered),fileLoader->cfg_filepath);
+		fileLoader->ModifyLineData(iterS->mastered_tag_line, to_string(iterS->mastered),fileLoader->filepath);
 		if (iterS->masteredThisBatch >= 2)
 		{
 			doneNum++;
@@ -246,7 +246,7 @@ void MissionPage::iRememberedThis()
 	{
 		iterW->mastered++;
 		iterW->masteredThisBatch++;
-		fileLoader->ModifyLineData(iterW->mastered_tag_line, to_string(iterW->mastered), fileLoader->cfg_filepath);
+		fileLoader->ModifyLineData(iterW->mastered_tag_line, to_string(iterW->mastered), fileLoader->filepath);
 		if (iterW->masteredThisBatch >= 2)
 		{
 			doneNum++;
@@ -277,7 +277,7 @@ void MissionPage::iGotIt()
 	{
 		iterS->mastered = 100;
 		iterS->masteredThisBatch = 100;
-		fileLoader->ModifyLineData(iterS->mastered_tag_line, to_string(iterS->mastered), fileLoader->cfg_filepath);
+		fileLoader->ModifyLineData(iterS->mastered_tag_line, to_string(iterS->mastered), fileLoader->filepath);
 		if (iterS->masteredThisBatch >= 2)
 		{
 			doneNum++;
@@ -304,7 +304,7 @@ void MissionPage::iGotIt()
 	{
 		iterW->mastered = 100;
 		iterW->masteredThisBatch = 100;
-		fileLoader->ModifyLineData(iterW->mastered_tag_line, to_string(iterW->mastered), fileLoader->cfg_filepath);
+		fileLoader->ModifyLineData(iterW->mastered_tag_line, to_string(iterW->mastered), fileLoader->filepath);
 		if (iterW->masteredThisBatch >= 2)
 		{
 			doneNum++;

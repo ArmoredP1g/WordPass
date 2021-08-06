@@ -40,30 +40,18 @@ void VocabPage::refreshAll()
 		{
 			//单词-全部
 			this->words = fileLoader->getAllWords(65535, 65535);
-			for(Word iter: *words)
+			for(Word_And_Sentence iter: *words)
 			{ 
-				//把释义变成单行
-				string paraphrase = "";
-				for (string iter_:iter.paraphrase)
-				{
-					paraphrase += iter_;
-				}
-				listContainer.push_back(new VocabListItem(nullptr, fileLoader, iter.origin, paraphrase));
+				listContainer.push_back(new VocabListItem(nullptr, fileLoader, &iter));
 			}
 		}
 		else
 		{
 			//单词-已掌握
 			this->words = fileLoader->getAllMasteredWords(parent->master_Word);
-			for (Word iter : *words)
+			for (Word_And_Sentence iter : *words)
 			{
-				//把释义变成单行
-				string paraphrase = "";
-				for (string iter_ : iter.paraphrase)
-				{
-					paraphrase += iter_;
-				}
-				listContainer.push_back(new VocabListItem(nullptr, fileLoader, iter.origin, paraphrase));
+				listContainer.push_back(new VocabListItem(nullptr, fileLoader, &iter));
 			}
 		}
 	}
@@ -73,30 +61,18 @@ void VocabPage::refreshAll()
 		{
 			//句子-全部
 			this->sentents = fileLoader->getAllSentences(65535, 65535);
-			for (Sentence iter : *sentents)
+			for (Word_And_Sentence iter : *sentents)
 			{
-				//把释义变成单行
-				string paraphrase = "";
-				for (string iter_ : iter.paraphrase)
-				{
-					paraphrase += iter_;
-				}
-				listContainer.push_back(new VocabListItem(nullptr, fileLoader, iter.origin, paraphrase));
+				listContainer.push_back(new VocabListItem(nullptr, fileLoader, &iter));
 			}
 		}
 		else
 		{
 			//句子-已掌握
 			this->sentents = fileLoader->getAllMasteredSentences(parent->master_Sentence);
-			for (Sentence iter : *sentents)
+			for (Word_And_Sentence iter : *sentents)
 			{
-				//把释义变成单行
-				string paraphrase = "";
-				for (string iter_ : iter.paraphrase)
-				{
-					paraphrase += iter_;
-				}
-				listContainer.push_back(new VocabListItem(nullptr, fileLoader, iter.origin, paraphrase));
+				listContainer.push_back(new VocabListItem(nullptr, fileLoader, &iter));
 			}
 		}
 	}
@@ -109,14 +85,6 @@ void VocabPage::refreshAll()
 		ui->listWidget->setItemWidget(listItem1, iter);
 	}
 
-	//for (int i = 0; i < 15; i++)
-	//{
-	//	VocabListItem * vocabListItem = new VocabListItem(nullptr, fileLoader, "apple", "苹果");
-	//	QListWidgetItem *listItem1 = new QListWidgetItem();
-	//	listItem1->setSizeHint(QSize(0, 50));
-	//	ui->listWidget->addItem(listItem1);
-	//	ui->listWidget->setItemWidget(listItem1, vocabListItem);
-	//}
 }
 
 //清空列表，释放内存
@@ -124,7 +92,6 @@ void VocabPage::resetList()
 {
 	//清空显示列表
 	ui->listWidget->clear();
-	for (int i = 0; i < ui->listWidget->count(); i++)
 
 
 	//释放自定义列表内存
@@ -135,4 +102,11 @@ void VocabPage::resetList()
 
 	//清空列表容器本身
 	listContainer.clear();
+}
+
+//删除选中内容
+void VocabPage::del()
+{
+	vector<Word_And_Sentence *>* deleteList = new vector<Word_And_Sentence *>();
+	//TODO
 }

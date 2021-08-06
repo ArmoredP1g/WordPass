@@ -11,7 +11,7 @@ FileLoader::FileLoader(const char* path)
 	this->filepath = path;
 }
 
-vector<Word> * FileLoader::getAllWords(int max, int master)
+vector<Word_And_Sentence> * FileLoader::getAllWords(int max, int master)
 {
 	ifstream ifs(filepath);
 	bool wordFinded = false;
@@ -19,9 +19,9 @@ vector<Word> * FileLoader::getAllWords(int max, int master)
 	bool paraphraseFinded = false;
 	bool masteredFinded = false;
 	string line;
-	vector<Word> * result = new vector<Word>();
+	vector<Word_And_Sentence> * result = new vector<Word_And_Sentence>();
 
-	Word word;
+	Word_And_Sentence word;
 	unsigned int lineCount = 0;
 	unsigned int wordCount = 0;
 	while (getline(ifs,line) && wordCount < max)
@@ -119,7 +119,7 @@ vector<Word> * FileLoader::getAllWords(int max, int master)
 	return result;
 }
 
-vector<Word> * FileLoader::getAllMasteredWords(int master)
+vector<Word_And_Sentence> * FileLoader::getAllMasteredWords(int master)
 {
 	ifstream ifs(filepath);
 	bool wordFinded = false;
@@ -127,9 +127,9 @@ vector<Word> * FileLoader::getAllMasteredWords(int master)
 	bool paraphraseFinded = false;
 	bool masteredFinded = false;
 	string line;
-	vector<Word> * result = new vector<Word>();
+	vector<Word_And_Sentence> * result = new vector<Word_And_Sentence>();
 
-	Word word;
+	Word_And_Sentence word;
 	unsigned int lineCount = 0;
 
 	while (getline(ifs, line))
@@ -226,7 +226,7 @@ vector<Word> * FileLoader::getAllMasteredWords(int master)
 	return result;
 }
 
-vector<Sentence> * FileLoader::getAllSentences(int max, int master)
+vector<Word_And_Sentence> * FileLoader::getAllSentences(int max, int master)
 {
 	ifstream ifs(filepath);
 	bool sentenceFinded = false;
@@ -235,9 +235,9 @@ vector<Sentence> * FileLoader::getAllSentences(int max, int master)
 	bool masteredFinded = false;
 
 	string line;
-	vector<Sentence> * result = new vector<Sentence>();
+	vector<Word_And_Sentence> * result = new vector<Word_And_Sentence>();
 
-	Sentence sentence;
+	Word_And_Sentence sentence;
 	unsigned int lineCount = 0;
 	unsigned int sentCount = 0;
 	while (getline(ifs, line) && sentCount < max)
@@ -336,7 +336,7 @@ vector<Sentence> * FileLoader::getAllSentences(int max, int master)
 	return result;
 }
 
-vector<Sentence> * FileLoader::getAllMasteredSentences(int master)
+vector<Word_And_Sentence> * FileLoader::getAllMasteredSentences(int master)
 {
 	ifstream ifs(filepath);
 	bool sentenceFinded = false;
@@ -345,9 +345,9 @@ vector<Sentence> * FileLoader::getAllMasteredSentences(int master)
 	bool masteredFinded = false;
 
 	string line;
-	vector<Sentence> * result = new vector<Sentence>();
+	vector<Word_And_Sentence> * result = new vector<Word_And_Sentence>();
 
-	Sentence sentence;
+	Word_And_Sentence sentence;
 	unsigned int lineCount = 0;
 
 	while (getline(ifs, line))
@@ -445,7 +445,7 @@ vector<Sentence> * FileLoader::getAllMasteredSentences(int master)
 	return result;
 }
 
-void FileLoader::addWord(Word word)
+void FileLoader::addWord(Word_And_Sentence word)
 {
 	ofstream ofs(filepath,ios::app);
 	ofs << "<word>" << endl;
@@ -481,7 +481,7 @@ void FileLoader::addWord(Word word)
 	ofs.close();
 }
 
-void FileLoader::addSentence(Sentence sentence)
+void FileLoader::addSentence(Word_And_Sentence sentence)
 {
 	ofstream ofs(filepath, ios::app);
 	ofs << "<sentence>" << endl;
@@ -600,6 +600,16 @@ void FileLoader::delete_(int startLine, int lineCount)
 	ofs.flush();
 	ofs << strFileData;
 	ofs.close();
+}
+
+void FileLoader::delete_(vector<Word_And_Sentence *>* deleteList)
+{
+	//根据在文件中的位置降序排序,从下向上删除，避免出现错误
+	sort(deleteList->begin(),deleteList->end(),GreaterSort);
+	for (Word_And_Sentence* iter : *deleteList)
+	{
+		//TODO
+	}
 }
 
 string FileLoader::loadOption(string key)
