@@ -15,6 +15,7 @@ VocabPage::VocabPage(QWidget *parent, FileLoader * fileLoader):
 	connect(ui->rb_masteredOnly, &QRadioButton::clicked, this, &VocabPage::refreshAll);
 	connect(ui->rb_sentences, &QRadioButton::clicked, this, &VocabPage::refreshAll);
 	connect(ui->rb_word, &QRadioButton::clicked, this, &VocabPage::refreshAll);
+	connect(ui->pb_deleteSelect, &QRadioButton::clicked, this, &VocabPage::del);
 	ui->rb_masteredOnly->setChecked(true);
 	ui->rb_sentences->setChecked(true);
 
@@ -108,5 +109,13 @@ void VocabPage::resetList()
 void VocabPage::del()
 {
 	vector<Word_And_Sentence *>* deleteList = new vector<Word_And_Sentence *>();
-	//TODO
+	for (VocabListItem * iter : listContainer)
+	{
+		if (iter->readyToDel)
+		{
+			deleteList->push_back(&iter->content);
+		}
+	}
+	fileLoader->delete_(deleteList);
+	refreshAll();
 }

@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>469</width>
+    <width>658</width>
     <height>517</height>
    </rect>
   </property>
@@ -72,6 +72,9 @@
    </item>
    <item>
     <widget class="QPushButton" name="pb_reviewMastered">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="text">
       <string>复习已掌握内容</string>
      </property>

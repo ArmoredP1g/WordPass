@@ -54,7 +54,7 @@ public:
 	int language = JP;
 private:
 	//ÓÃÓÚvector½µÐòÅÅÐò
-	bool GreaterSort(Word_And_Sentence * a, Word_And_Sentence * b) { return(a->startLine > b->startLine); };
+	//bool GreaterSort(Word_And_Sentence a, Word_And_Sentence b);
 	ifstream ifs;
 	ofstream ofs;
 	fstream fs;

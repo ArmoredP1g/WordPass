@@ -10,6 +10,8 @@ VocabListItem::VocabListItem(QWidget *parent, FileLoader *fileLoader, Word_And_S
     ui->setupUi(this);
 	connect(ui->tb_meaning,&QToolButton::clicked,this,&VocabListItem::ShowMeaning);
 	connect(ui->tb_forget, &QToolButton::clicked, this, &VocabListItem::Forget);
+	connect(ui->cb, &QCheckBox::released, this, &VocabListItem::SetDelFlag);
+	
 	ui->l->setText(QString::fromLocal8Bit(content->origin.c_str()));
 	ui->l->setStyleSheet("color:#ff6600;font-size:15px;font-family:\"Arial\";");
 
@@ -43,4 +45,9 @@ void VocabListItem::Forget()
 	ui->cb->setDisabled(true);
 	ui->tb_forget->setDisabled(true);
 	ui->l->setStyleSheet("color:#72777b;font-size:15px;font-family:\"Arial\";");
+}
+
+void VocabListItem::SetDelFlag()
+{
+	readyToDel = ui->cb->isChecked();
 }

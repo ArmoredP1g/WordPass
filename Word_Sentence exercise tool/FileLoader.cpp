@@ -1,5 +1,5 @@
 #include"FileLoader.h"
-using namespace std;
+//using namespace std;
 FileLoader::FileLoader(const char* path)
 {
 	fs = fstream(path);
@@ -602,14 +602,21 @@ void FileLoader::delete_(int startLine, int lineCount)
 	ofs.close();
 }
 
+//给下边delete准备的
+bool GreaterSort(Word_And_Sentence* a, Word_And_Sentence* b)
+{
+	return(a->startLine > b->startLine);
+};
+
 void FileLoader::delete_(vector<Word_And_Sentence *>* deleteList)
 {
 	//根据在文件中的位置降序排序,从下向上删除，避免出现错误
-	sort(deleteList->begin(),deleteList->end(),GreaterSort);
+	sort(deleteList->begin(),deleteList->end(), GreaterSort);
 	for (Word_And_Sentence* iter : *deleteList)
 	{
-		//TODO
+		delete_(iter->startLine,iter->lineCount);
 	}
+	delete deleteList;
 }
 
 string FileLoader::loadOption(string key)
@@ -642,6 +649,7 @@ void FileLoader::changeOption(string key, string value)
 		}
 	}
 }
+
 
 vector<string> FileLoader::split(const string& str, const string& delim)
 {
