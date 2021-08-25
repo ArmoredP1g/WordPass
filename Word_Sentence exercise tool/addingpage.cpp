@@ -6,7 +6,12 @@ AddingPage::AddingPage(QWidget *parent) :
     ui(new Ui::AddingPage)
 {
     ui->setupUi(this);
+	windowAttrFlag = 0x00000000;//初始化窗口属性
 
+	//设置无边框
+	//windowAttrFlag |= Qt::FramelessWindowHint;
+	windowAttrFlag |= Qt::WindowStaysOnTopHint;
+	setWindowFlags(windowAttrFlag);
 	ui->rb_addWord->setChecked(true);
 	ui->rb_jp->setChecked(true);
 

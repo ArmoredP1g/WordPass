@@ -5,7 +5,12 @@ Word_Sentenceexercisetool::Word_Sentenceexercisetool(QWidget *parent)
     : QWidget(parent)
 {
     ui.setupUi(this);
-	setWindowFlags(Qt::FramelessWindowHint);
+	windowAttrFlag = 0x00000000;//初始化窗口属性
+
+	//设置无边框
+	windowAttrFlag |= Qt::FramelessWindowHint;
+	setWindowFlags(windowAttrFlag);
+
 	delete ui.mainWidget;
 	ui.mainWidget = new Index_Menu(this);
 	ui.verticalLayout->addWidget(ui.mainWidget);
@@ -20,6 +25,7 @@ Word_Sentenceexercisetool::Word_Sentenceexercisetool(QWidget *parent)
 	connect(ui.pb_home, &QPushButton::clicked, this, &Word_Sentenceexercisetool::Back2Home);
 	connect(ui.pb_add, &QPushButton::clicked, this, &Word_Sentenceexercisetool::goAddingPage);
 	connect(ui.pb_close, &QPushButton::clicked, this, &QWidget::close);
+	connect(ui.pb_top, &QPushButton::clicked, this, &Word_Sentenceexercisetool::setTop);
 
 	//fileLoader->getAllWords(100, 10);
 	//fileLoader->getAllSentences(100,10);
@@ -130,4 +136,26 @@ void Word_Sentenceexercisetool::goAddingPage()
 {
 	addingPage->show();
 }
+
+//设置窗口置顶
+void Word_Sentenceexercisetool::setTop()
+{
+	//处于置顶状态
+	if ((windowAttrFlag & Qt::WindowStaysOnTopHint) == Qt::WindowStaysOnTopHint)
+	{
+		//将对应位置0
+		windowAttrFlag &= (~Qt::WindowStaysOnTopHint);
+		setWindowFlags(windowAttrFlag);
+		show();//刷新窗口
+	}
+	//位处于置顶状态
+	else
+	{
+		//将对应位置0
+		windowAttrFlag |= Qt::WindowStaysOnTopHint;
+		setWindowFlag(Qt::WindowStaysOnTopHint);
+		show();
+	}
+}
+
 

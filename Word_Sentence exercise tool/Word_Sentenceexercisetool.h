@@ -22,6 +22,7 @@ public:
 	void goSentenceMission();
 	void goVocabPage();
 	void goSettingPage();
+	void setTop();
 
     Ui::Word_SentenceexercisetoolClass ui;
 	void LoadConfig(string path);
@@ -33,6 +34,7 @@ public:
 	unsigned int batchSize_Sentence;
 	unsigned int master_Word;
 	unsigned int master_Sentence;
+	Qt::WindowFlags windowAttrFlag;//窗口状态标志位
 private slots:
 	void goAddingPage();
 };

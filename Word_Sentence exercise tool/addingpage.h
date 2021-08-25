@@ -20,6 +20,7 @@ public:
 private:
     Ui::AddingPage *ui;
 	FileLoader * fileLoader;
+	Qt::WindowFlags windowAttrFlag;//窗口状态标志位
 	void addItem();
 };
 

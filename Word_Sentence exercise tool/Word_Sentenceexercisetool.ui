@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>400</height>
+    <width>528</width>
+    <height>353</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -102,6 +102,25 @@
          <property name="bottomMargin">
           <number>0</number>
          </property>
+         <item>
+          <widget class="QPushButton" name="pb_top">
+           <property name="minimumSize">
+            <size>
+             <width>22</width>
+             <height>22</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>22</width>
+             <height>22</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>顶</string>
+           </property>
+          </widget>
+         </item>
          <item>
           <widget class="QPushButton" name="pb_home">
            <property name="minimumSize">
