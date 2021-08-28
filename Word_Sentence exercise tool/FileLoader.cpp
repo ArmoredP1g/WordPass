@@ -534,9 +534,13 @@ void FileLoader::ConfirmSettings(Setting settings)
 		{
 			ModifyLineData(lineCount, "BatchSize(sentence):" + to_string(settings.BatchSize_sentence), ".\\userdata\\config.txt");
 		}
-		if (keyPair[0] == "Master(word)" || keyPair[0] == "Master(sentence)")
+		if (keyPair[0] == "Master(word)")
 		{
 			ModifyLineData(lineCount, "Master(word):" + to_string(settings.Master_word), ".\\userdata\\config.txt");
+		}
+		if (keyPair[0] == "Master(sentence)")
+		{
+			ModifyLineData(lineCount, "Master(sentence):" + to_string(settings.Master_word), ".\\userdata\\config.txt");
 		}
 	}
 	ifs.close();

@@ -1,6 +1,6 @@
 TheFinalSchedule(word):0
 TheFinalSchedule(sentence):0
-BatchSize(word):100
+BatchSize(word):10
 BatchSize(sentence):10
-Master(word):5
-Master(word):5
+Master(word):51
+Master(sentence):51
